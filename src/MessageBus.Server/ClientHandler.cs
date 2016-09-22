@@ -22,16 +22,10 @@ namespace MessageBus.Server
             return Task.FromResult(0);
         }
 
-        private Task ProcessSocket(AspNetWebSocketContext arg)
+        private async Task ProcessSocket(AspNetWebSocketContext arg)
         {
             var socket = arg.WebSocket;
-            return ProcessSocketInternal(socket);
-        }
-
-        private async Task ProcessSocketInternal(WebSocket socket)
-        {
-            Core.IMessageBusServer server = Core.WebSocketMessageBusServer.Current;
-            await server.AddClient(socket);
+            await Core.WebSocketMessageBusServer.Current.AddClient(socket);
         }
     }
 }

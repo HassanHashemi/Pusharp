@@ -6,9 +6,10 @@ namespace Pusharp.Server.WebSockets
 {
     public class Global : HttpApplication
     {
-
+        
         protected void Application_Start(object sender, EventArgs e)
         {
+
             AppEventManager.ExecuteHandler(AppEventType.App_Start);
         }
 

@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageBus.Server", "src\Me
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZSoft.PushServices.WebSockets", "src\Pusharp.Server.WebSockets\ZSoft.PushServices.WebSockets.csproj", "{76F54D67-1AA4-4159-AC91-C14383F8DA64}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utils", "Utils\Utils.csproj", "{11F83CBA-644D-4646-AF75-A9BBFA19A6E8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,10 @@ Global
 		{76F54D67-1AA4-4159-AC91-C14383F8DA64}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76F54D67-1AA4-4159-AC91-C14383F8DA64}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{76F54D67-1AA4-4159-AC91-C14383F8DA64}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11F83CBA-644D-4646-AF75-A9BBFA19A6E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11F83CBA-644D-4646-AF75-A9BBFA19A6E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11F83CBA-644D-4646-AF75-A9BBFA19A6E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11F83CBA-644D-4646-AF75-A9BBFA19A6E8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -47,5 +53,6 @@ Global
 		{B6A24C7B-511A-4064-BA63-D272D056DF2B} = {D7ABBC2E-FE9E-47B0-8D81-2689A1E3C717}
 		{9836EA86-5FD9-4E77-A5F4-2FF7042381AC} = {D7ABBC2E-FE9E-47B0-8D81-2689A1E3C717}
 		{76F54D67-1AA4-4159-AC91-C14383F8DA64} = {6FB314EE-8C34-4582-8BC7-D7E687C6B467}
+		{11F83CBA-644D-4646-AF75-A9BBFA19A6E8} = {6FB314EE-8C34-4582-8BC7-D7E687C6B467}
 	EndGlobalSection
 EndGlobal
