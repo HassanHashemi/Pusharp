@@ -15,5 +15,4 @@ namespace MessageBus.Server
             await WebSocketMessageBusServer.Current.PostMessage(new JSONMessage(json));
         }
     }
-
 }
