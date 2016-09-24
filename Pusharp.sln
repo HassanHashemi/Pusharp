@@ -23,7 +23,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pusharp.Clients.Xamarin.And
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pusharp.Clients.Xamarin.IOS", "Pusharp.Clients.Xamarin.IOS\Pusharp.Clients.Xamarin.IOS.csproj", "{5B0FE5AA-B28C-46CD-B4EF-95C95DE5E6B7}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Pusharp.Clients", "Pusharp.Clients\Pusharp.Clients.shproj", "{B85CC9F3-EBB7-4D9C-9242-47F40705A57F}"
+EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Pusharp.Clients\Pusharp.Clients.projitems*{b85cc9f3-ebb7-4d9c-9242-47f40705a57f}*SharedItemsImports = 13
+		Pusharp.Clients\Pusharp.Clients.projitems*{454e649a-880c-4d22-adee-996be6795412}*SharedItemsImports = 4
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		AppStore|Any CPU = AppStore|Any CPU
 		Debug|Any CPU = Debug|Any CPU
@@ -86,5 +92,6 @@ Global
 		{173D023E-6130-4742-9C30-5A571728617D} = {6FB314EE-8C34-4582-8BC7-D7E687C6B467}
 		{454E649A-880C-4D22-ADEE-996BE6795412} = {173D023E-6130-4742-9C30-5A571728617D}
 		{5B0FE5AA-B28C-46CD-B4EF-95C95DE5E6B7} = {173D023E-6130-4742-9C30-5A571728617D}
+		{B85CC9F3-EBB7-4D9C-9242-47F40705A57F} = {173D023E-6130-4742-9C30-5A571728617D}
 	EndGlobalSection
 EndGlobal

@@ -12,15 +12,15 @@ namespace Pusharp.Server.WebSockets
         private const int IDENTIFICATION_TIMEOUT = 10000;
         private const int HEARTBEAT_TIMEOUT = 25000;
         // TODO: 
-        
+
         private static Server _current;
         private readonly ISocketCollection<string> _sockets = DeviceSocketCollection.Current;
-        
+
         public Server()
         {
-            
+
         }
-        
+
         public static Server Current
         {
             get
@@ -67,7 +67,7 @@ namespace Pusharp.Server.WebSockets
                     }
 
                     string jsonInfo = await ReceiveText(socket, result, buffer);
-                    
+
                     if (!ClientInfo.TryParseJson(jsonInfo, out clientInfo))
                     {
                         socket.ShutDown().Forget();
@@ -87,7 +87,7 @@ namespace Pusharp.Server.WebSockets
             {
                 using (CancellationTokenSource cts = new CancellationTokenSource())
                 {
-                    //cts.CancelAfter(HEARTBEAT_TIMEOUT);
+                    cts.CancelAfter(HEARTBEAT_TIMEOUT);
 
                     await ReceiveSocket(socket, buffer, cts.Token)
                         .ContinueWith(async t =>
@@ -97,16 +97,10 @@ namespace Pusharp.Server.WebSockets
                             switch (result.MessageType)
                             {
                                 case WebSocketMessageType.Text:
-                                    var receiveTask = ReceiveText(socket, result, buffer);
-                                    await receiveTask.ContinueWith(t2 =>
-                                    {
-                                        OnTextMessageReceived(new MessageEventArgs<string>()
-                                        {
-                                            Socket = socket,
-                                            Message = t2.Result,
-                                            SocketId = id
-                                        });
-                                    }, TaskContinuationOptions.OnlyOnRanToCompletion);
+                                    await ReceiveText(id, socket, buffer, result);
+                                    break;
+                                case WebSocketMessageType.Close:
+                                    socket.ShutDown().Forget();
                                     break;
                                 case WebSocketMessageType.Binary:
                                     if (!t.Result.IsHeartbeat())
@@ -114,12 +108,24 @@ namespace Pusharp.Server.WebSockets
                                         throw new NotSupportedException("Biary Messages are not supported at this time...");
                                     }
                                     break;
-                                case WebSocketMessageType.Close:
-                                    break;
                             }
                         }, TaskContinuationOptions.OnlyOnRanToCompletion);
                 }
             }
+        }
+
+        private async Task ReceiveText(string id, WebSocket socket, ArraySegment<byte> buffer, WebSocketReceiveResult result)
+        {
+            var receiveTask = ReceiveText(socket, result, buffer);
+            await receiveTask.ContinueWith(t2 =>
+            {
+                OnTextMessageReceived(new MessageEventArgs<string>()
+                {
+                    Socket = socket,
+                    Message = t2.Result,
+                    SocketId = id
+                });
+            }, TaskContinuationOptions.OnlyOnRanToCompletion);
         }
 
         protected void OnTextMessageReceived(MessageEventArgs<string> messageEventArgs)

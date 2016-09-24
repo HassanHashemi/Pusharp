@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>b85cc9f3-ebb7-4d9c-9242-47f40705a57f</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Pusharp.Clients</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)ClientInfoDTO.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CommandDTO.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CommandTypeDTO.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IconDTO.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NotificationButtonDTO.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NotificationDTO.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NotificationReceivedEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PeriodicTaskFactory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PushClient.cs" />
+  </ItemGroup>
+</Project>
