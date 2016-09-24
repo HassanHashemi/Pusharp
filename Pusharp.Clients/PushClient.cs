@@ -4,6 +4,7 @@ using System.Net.WebSockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Utils;
 
 namespace Pusharp.Clients
 {
@@ -81,6 +82,28 @@ namespace Pusharp.Clients
             }
         }
 
+
+        public Task Send(string message)
+        {
+            try
+            {
+                if (this.Socket.State ==  WebSocketState.Open)
+                {
+                    var buffer = new ArraySegment<byte>(Encoding.UTF8.GetBytes(message));
+                    return this.Socket.SendAsync(buffer, WebSocketMessageType.Text, true, CancellationToken.None);
+                }
+
+                TaskCompletionSource<object> tcs = new TaskCompletionSource<object>();
+                tcs.SetCanceled();
+                return tcs.Task;
+            }
+            catch(Exception ex)
+            {
+                TaskCompletionSource<object> tcs = new TaskCompletionSource<object>();
+                tcs.SetException(ex);
+                return tcs.Task;
+            }
+        }
 
         private void StartHeartbeat()
         {

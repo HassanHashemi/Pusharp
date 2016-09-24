@@ -10,6 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)ClientInfoDTO.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ClientMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CommandDTO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CommandTypeDTO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IconDTO.cs" />
