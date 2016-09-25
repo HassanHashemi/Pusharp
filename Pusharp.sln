@@ -35,6 +35,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZSoft.PushServices.Data.Ser
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZSoft.PushServices.Data.Services.Abstraction", "src\data\ZSoft.PushServices.Data.Services.Abstraction\ZSoft.PushServices.Data.Services.Abstraction.csproj", "{D045A2D4-25B7-469C-8585-63FC72BEA1CD}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "web-ui", "web-ui", "{688F0470-C090-467D-9619-DE284801D5AC}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Pusharp.Clients\Pusharp.Clients.projitems*{b85cc9f3-ebb7-4d9c-9242-47f40705a57f}*SharedItemsImports = 13
@@ -132,5 +134,6 @@ Global
 		{6A9FF6C6-66B1-432B-A47C-B19DA9719D20} = {278AE9EA-ECF8-4DD9-87FE-9157CE16F857}
 		{9A402D27-D1F4-4671-ACD1-54453DF2AB42} = {278AE9EA-ECF8-4DD9-87FE-9157CE16F857}
 		{D045A2D4-25B7-469C-8585-63FC72BEA1CD} = {278AE9EA-ECF8-4DD9-87FE-9157CE16F857}
+		{688F0470-C090-467D-9619-DE284801D5AC} = {6FB314EE-8C34-4582-8BC7-D7E687C6B467}
 	EndGlobalSection
 EndGlobal

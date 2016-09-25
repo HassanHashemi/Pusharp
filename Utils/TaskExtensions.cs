@@ -14,7 +14,7 @@ namespace Utils
             }
             catch (Exception)
             {
-
+                // Ignore every thing
             }
         }
 
