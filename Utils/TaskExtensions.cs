@@ -20,7 +20,11 @@ namespace Utils
 
         public static Task StartPeriodic(this TaskFactory source, Action action, int intervalInMilliseconds, CancellationToken cancellationToken, int maxIteration = -1)
         {
-            return PeriodicTaskFactory.Start(action, intervalInMilliseconds, maxIterations: maxIteration, cancelToken: cancellationToken);
+            return PeriodicTaskFactory.Start(action, 
+                intervalInMilliseconds,
+                maxIterations: maxIteration, 
+                cancelToken: cancellationToken,
+                duration: Int32.MaxValue);
         }
     }
 }

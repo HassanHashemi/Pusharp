@@ -17,7 +17,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)NotificationButtonDTO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NotificationDTO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NotificationReceivedEventArgs.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)PeriodicTaskFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PushClient.cs" />
   </ItemGroup>
 </Project>
