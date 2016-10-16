@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{6FB314EE-8C34-4582-8BC7-D7E687C6B467}"
 EndProject
@@ -39,8 +39,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "web-ui", "web-ui", "{688F04
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		Pusharp.Clients\Pusharp.Clients.projitems*{b85cc9f3-ebb7-4d9c-9242-47f40705a57f}*SharedItemsImports = 13
 		Pusharp.Clients\Pusharp.Clients.projitems*{454e649a-880c-4d22-adee-996be6795412}*SharedItemsImports = 4
+		Pusharp.Clients\Pusharp.Clients.projitems*{b85cc9f3-ebb7-4d9c-9242-47f40705a57f}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		AppStore|Any CPU = AppStore|Any CPU
@@ -84,8 +84,8 @@ Global
 		{454E649A-880C-4D22-ADEE-996BE6795412}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{454E649A-880C-4D22-ADEE-996BE6795412}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{454E649A-880C-4D22-ADEE-996BE6795412}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5B0FE5AA-B28C-46CD-B4EF-95C95DE5E6B7}.AppStore|Any CPU.ActiveCfg = AppStore|Any CPU
-		{5B0FE5AA-B28C-46CD-B4EF-95C95DE5E6B7}.AppStore|Any CPU.Build.0 = AppStore|Any CPU
+		{5B0FE5AA-B28C-46CD-B4EF-95C95DE5E6B7}.AppStore|Any CPU.ActiveCfg = Release|Any CPU
+		{5B0FE5AA-B28C-46CD-B4EF-95C95DE5E6B7}.AppStore|Any CPU.Build.0 = Release|Any CPU
 		{5B0FE5AA-B28C-46CD-B4EF-95C95DE5E6B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5B0FE5AA-B28C-46CD-B4EF-95C95DE5E6B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B0FE5AA-B28C-46CD-B4EF-95C95DE5E6B7}.Release|Any CPU.ActiveCfg = Release|Any CPU

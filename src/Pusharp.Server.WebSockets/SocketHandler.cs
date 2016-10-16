@@ -4,7 +4,6 @@ using System.Web.WebSockets;
 
 namespace Pusharp.Server.WebSockets
 {
-    
     public class SocketHandler : HttpTaskAsyncHandler
     {
         public override bool IsReusable
