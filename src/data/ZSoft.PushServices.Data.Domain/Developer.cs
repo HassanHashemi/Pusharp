@@ -11,6 +11,8 @@ namespace ZSoft.PushServices.Data.Domain
     {
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<Developer, long> manager)
         {
+
+
             return await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
         }
 
