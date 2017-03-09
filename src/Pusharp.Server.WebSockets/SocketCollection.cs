@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Concurrent;
 using System.Net.WebSockets;
-using System.Threading.Tasks;
 
 namespace Pusharp.Server.WebSockets
 {

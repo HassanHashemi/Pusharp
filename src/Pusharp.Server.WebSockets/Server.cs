@@ -21,6 +21,14 @@ namespace Pusharp.Server.WebSockets
 
         }
 
+        public ISocketCollection<string> Clients
+        {
+            get
+            {
+                return _sockets;
+            }
+        }
+
         public static Server Current
         {
             get
@@ -51,8 +59,8 @@ namespace Pusharp.Server.WebSockets
 
         private async Task<ClientInfo> TryGetInfo(WebSocket socket)
         {
-            var buffer = WebSocket.CreateClientBuffer(1024, 1024);
-            var cts = new CancellationTokenSource();
+            ArraySegment<byte> buffer = WebSocket.CreateClientBuffer(1024, 1024);
+            CancellationTokenSource cts = new CancellationTokenSource();
             cts.CancelAfter(IDENTIFICATION_TIMEOUT);
             var recieveTask = this.ReceiveSocket(socket, buffer, cts.Token, retry: 0);
 
@@ -114,18 +122,19 @@ namespace Pusharp.Server.WebSockets
             }
         }
 
-        private async Task ReceiveText(string id, WebSocket socket, ArraySegment<byte> buffer, WebSocketReceiveResult result)
+        private Task ReceiveText(string id, WebSocket socket, ArraySegment<byte> buffer, WebSocketReceiveResult result)
         {
-            var receiveTask = ReceiveText(socket, result, buffer);
-            await receiveTask.ContinueWith(t2 =>
-            {
-                OnTextMessageReceived(new MessageEventArgs<string>()
-                {
-                    Socket = socket,
-                    Message = t2.Result,
-                    SocketId = id
-                });
-            }, TaskContinuationOptions.OnlyOnRanToCompletion);
+            return 
+                ReceiveText(socket, result, buffer)
+                    .ContinueWith(t2 =>
+                    {
+                        OnTextMessageReceived(new MessageEventArgs<string>()
+                        {
+                            Socket = socket,
+                            Message = t2.Result,
+                            SocketId = id
+                        });
+                    }, TaskContinuationOptions.OnlyOnRanToCompletion);
         }
 
         protected void OnTextMessageReceived(MessageEventArgs<string> messageEventArgs)
@@ -178,7 +187,7 @@ namespace Pusharp.Server.WebSockets
 
         private async Task<string> ReceiveText(WebSocket socket, WebSocketReceiveResult receiveResult, ArraySegment<byte> buffer)
         {
-            string result = EncodeTextBuffer(buffer, 0, receiveResult.Count);
+            string result = DecodeTextBuffer(buffer, 0, receiveResult.Count);
 
             while (!receiveResult.EndOfMessage)
             {
@@ -186,14 +195,14 @@ namespace Pusharp.Server.WebSockets
                 await receiveTask.ContinueWith(t =>
                     {
                         receiveResult = t.Result;
-                        result += EncodeTextBuffer(buffer, 0, receiveResult.Count);
+                        result += DecodeTextBuffer(buffer, 0, receiveResult.Count);
                     }, TaskContinuationOptions.OnlyOnRanToCompletion);
             }
 
             return result;
         }
 
-        private string EncodeTextBuffer(ArraySegment<byte> buffer, int offSet, int count)
+        private string DecodeTextBuffer(ArraySegment<byte> buffer, int offSet, int count)
         {
             return Encoding.UTF8.GetString(buffer.Array, offSet, count);
         }

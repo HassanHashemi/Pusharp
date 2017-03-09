@@ -86,7 +86,13 @@ namespace MessageBus.Client
 
         private async Task<string> ReceiveTextInternal(ClientWebSocket Socket, WebSocketReceiveResult result, ArraySegment<byte> buffer)
         {
-            string message = Encoding.UTF8.GetString(buffer.Array, 0, result.Count);
+            string message = string.Empty;
+
+            if (buffer.Array?.Length == 0)
+            {
+                // read the current data inside buffer
+                message = Encoding.UTF8.GetString(buffer.Array, 0, result.Count);
+            }
 
             while (!(result = await Socket.ReceiveAsync(buffer, CancellationToken.None)).EndOfMessage)
                 message += Encoding.UTF8.GetString(buffer.Array, 0, result.Count);

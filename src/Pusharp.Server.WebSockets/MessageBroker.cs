@@ -15,8 +15,8 @@ namespace Pusharp.Server.WebSockets
 
         private readonly int MAX_BROKER_THREAD_COUNT = Environment.ProcessorCount * 4;
         private readonly ActionBlock<Tuple<string, WebSocket>> _worker;
-        private  IMessageBusClient _bus;
-        
+        private IMessageBusClient _bus;
+
         private IMessageBusClient Bus
         {
             get
@@ -34,7 +34,7 @@ namespace Pusharp.Server.WebSockets
 
         private void BusClient_MessageReceived(object sender, MessageBusEventArgs e)
         {
-            
+
         }
 
         public MessageBroker GetCurrentInstance()
@@ -46,33 +46,28 @@ namespace Pusharp.Server.WebSockets
         {
             return _current ?? (_current = new MessageBroker(token));
         }
-
-        private void _broker_MessageReceived(object sender, MessageBusEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
+        
         private MessageBroker(CancellationToken cancellationToken)
         {
             _worker = new ActionBlock<Tuple<string, WebSocket>>(
                 (tuple) =>
                 {
                     this.SendAsync(tuple.Item2, tuple.Item1).Forget();
-                }, new ExecutionDataflowBlockOptions()
-                    {
-                        BoundedCapacity = int.MaxValue,
-                        MaxDegreeOfParallelism = MAX_BROKER_THREAD_COUNT,
-                        CancellationToken = cancellationToken
-                    });
+                },
+                new ExecutionDataflowBlockOptions()
+                {
+                    BoundedCapacity = int.MaxValue,
+                    MaxDegreeOfParallelism = MAX_BROKER_THREAD_COUNT,
+                    CancellationToken = cancellationToken
+                });
         }
 
         private MessageBroker() : this(CancellationToken.None) { }
-        
+
         private Task SendAsync(WebSocket socket, string message, int retryCount = 3)
         {
             try
             {
-                message = message + "(" + Thread.CurrentThread.ManagedThreadId + ")";
                 return socket.SendAsync(new ArraySegment<byte>(Encoding.UTF8.GetBytes(message)),
                     WebSocketMessageType.Text,
                     true,
@@ -89,7 +84,7 @@ namespace Pusharp.Server.WebSockets
                 return Task.Factory.CreateFaultedTask(ex);
             }
         }
-        
+
         public void Post(WebSocket socket, string message)
         {
             this._worker.Post(new Tuple<string, WebSocket>(message, socket));

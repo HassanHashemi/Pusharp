@@ -87,7 +87,7 @@ namespace Pusharp.Clients
         {
             try
             {
-                if (this.Socket.State ==  WebSocketState.Open)
+                if (this.Socket.State == WebSocketState.Open)
                 {
                     var buffer = new ArraySegment<byte>(Encoding.UTF8.GetBytes(message));
                     return this.Socket.SendAsync(buffer, WebSocketMessageType.Text, true, CancellationToken.None);
@@ -97,7 +97,7 @@ namespace Pusharp.Clients
                 tcs.SetCanceled();
                 return tcs.Task;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 TaskCompletionSource<object> tcs = new TaskCompletionSource<object>();
                 tcs.SetException(ex);
@@ -110,28 +110,24 @@ namespace Pusharp.Clients
             CancellationTokenSource periodicTaskTokenSource = new CancellationTokenSource();
             this._heartBeatWorker = Task.Factory.StartPeriodic(() =>
             {
-                try
+                if (this.Socket.State == WebSocketState.Open)
                 {
-                    if (this.Socket.State == WebSocketState.Open)
-                    {
-                        Socket.SendAsync(
-                            new ArraySegment<byte>(this.HEARTBEAT_DATA),
-                            WebSocketMessageType.Binary,
-                            true,
-                            CancellationToken.None);
-                    }
+                    Socket.SendAsync(
+                        new ArraySegment<byte>(this.HEARTBEAT_DATA),
+                        WebSocketMessageType.Binary,
+                        true,
+                        CancellationToken.None);
                 }
-                catch (Exception)
-                {
 
-                }
-            }, HEARTBEAT_INTERVAL, periodicTaskTokenSource.Token);
+            }, HEARTBEAT_INTERVAL,
+            periodicTaskTokenSource.Token);
+
             this.Disconnected += (s, ea) => periodicTaskTokenSource.Cancel();
-
         }
 
         protected void OnMessageReceived(NotificationReceivedEventArgs args)
         {
+
             if (this.NotificationReceived != null)
             {
                 this.NotificationReceived(this, args);
@@ -139,6 +135,7 @@ namespace Pusharp.Clients
         }
 
 
+        // TODO: transform this method into a more FUCKING human readable form.
         private async void ProcessSocket()
         {
             var currentMessage = string.Empty;

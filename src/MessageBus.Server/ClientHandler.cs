@@ -1,5 +1,4 @@
-﻿using System.Net.WebSockets;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Web;
 using System.Web.WebSockets;
 
@@ -24,8 +23,7 @@ namespace MessageBus.Server
 
         private async Task ProcessSocket(AspNetWebSocketContext arg)
         {
-            var socket = arg.WebSocket;
-            await Core.WebSocketMessageBusServer.Current.AddClient(socket);
+            await Core.WebSocketMessageBusServer.Current.AddClient(arg.WebSocket);
         }
     }
 }

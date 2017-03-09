@@ -9,5 +9,4 @@ namespace MessageBus.Client
         Task Start();
         bool Connected { get; }
     }
-
 }

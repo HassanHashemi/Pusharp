@@ -45,16 +45,14 @@ namespace MessageBus.Core
 
         public async Task AddClient(WebSocket socket)
         {
-            if(this.Clients.TryAdd(socket.GetHashCode(), socket))
+            if (this.Clients.TryAdd(socket.GetHashCode(), socket))
             {
                 while (socket.State == WebSocketState.Open)
                 {
                     try
                     {
-                        // we will never receive data from clients, however we must await the socket in order to prevent
-                        // the handle from:
-                        // 1 - disposing by iis or aspnet runtime engine
-                        // 2 - some sort of heartbeat and keeping track of clients 
+                        // we will never receive data from clients, however we must await the socket in order to receive hearbeat and also
+                        // to prevent client from being recycled by iis native runtime engine
                         await socket.ReceiveAsync(WebSocket.CreateClientBuffer(128, 128), CancellationToken.None);
                     }
                     catch (Exception)
@@ -63,6 +61,8 @@ namespace MessageBus.Core
                     }
                 }
 
+                // client is dead
+                // remove client from client collection
                 this.Clients.TryRemove(socket.GetHashCode(), out socket);
             }
         }
